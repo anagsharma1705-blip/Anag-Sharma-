@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mom, I’m Sorry</title>
+    <meta charset="UTF-8">
+    <title>Mom, I am Sorry</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -59,6 +60,11 @@
             z-index: 999;
         }
 
+        #cryingCat {
+            display: none;
+            margin-top: 20px;
+        }
+
         @keyframes fall {
             0% { transform: translateY(-10vh) translateX(0px) rotate(0deg); opacity:1; }
             100% { transform: translateY(110vh) translateX(var(--drift)) rotate(var(--rotate)); opacity:0; }
@@ -80,15 +86,16 @@
 <body>
 
 <div class="glow-box">
-
+    <!-- Question 1 -->
     <div id="q1">
         <h1>Mom, can I say something important? 💫</h1>
         <button class="btn" onclick="showQ2()">Yes</button>
         <button class="btn no-btn" onmouseover="moveButton(this)">No</button>
     </div>
 
+    <!-- Question 2 -->
     <div id="q2" style="display:none;">
-        <h1>I’m really sorry for my mistake 😔 Will you forgive me?</h1>
+        <h1>I am really sorry for my mistake 😔 Will you forgive me?</h1>
         <button class="btn" onclick="showSuspense()">Yes</button>
         <button class="btn no-btn" onmouseover="moveButton(this)">No</button>
     </div>
@@ -98,18 +105,18 @@
         <h1 id="suspenseText">Hmmmm...</h1>
     </div>
 
+    <!-- Final Question -->
     <div id="q3" style="display:none;">
         <h1>Do you forgive me? ❤️</h1>
         <button class="btn" onclick="forgiveYes()">Yes</button>
         <button class="btn no-btn" onclick="forgiveNo(this)">No</button>
         <br><br>
-        <img id="cryingCat" src="crying-cat.gif" width="250" style="display:none; margin-top:20px;">
+        <img id="cryingCat" src="crying-cat.gif" width="250">
     </div>
-
 </div>
 
 <script>
-let noCount = 0; // Track how many times "No" is clicked
+let noCount = 0;
 
 function showQ2() {
     document.getElementById("q1").style.display = "none";
@@ -126,7 +133,7 @@ function showSuspense() {
     let text = document.getElementById("suspenseText");
     text.innerHTML = "But wait...";
 
-    setTimeout(() => { text.innerHTML = "There’s something important..."; }, 1200);
+    setTimeout(() => { text.innerHTML = "There's something important..."; }, 1200);
     setTimeout(() => { text.innerHTML = "I need to know..."; }, 2400);
     setTimeout(() => {
         suspense.style.display = "none";
@@ -144,10 +151,10 @@ function forgiveYes() {
 
 function forgiveNo(button) {
     if (noCount === 0) {
-        moveButton(button); // First time: button runs away
+        moveButton(button);
         noCount++;
     } else {
-        let cat = document.getElementById("cryingCat"); // Second time: show crying cat
+        let cat = document.getElementById("cryingCat");
         cat.style.display = "block";
         setTimeout(() => { cat.style.display = "none"; resetFlow(); }, 2000);
     }
@@ -157,7 +164,7 @@ function resetFlow() {
     document.getElementById("q3").style.display = "none";
     document.getElementById("q2").style.display = "none";
     document.getElementById("q1").style.display = "block";
-    noCount = 0; // reset counter
+    noCount = 0;
 }
 
 function moveButton(button) {
